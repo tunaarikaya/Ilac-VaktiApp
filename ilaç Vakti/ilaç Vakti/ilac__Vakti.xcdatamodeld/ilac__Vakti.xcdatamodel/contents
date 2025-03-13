@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24D70" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Eczane" representedClassName="Eczane" syncable="YES" codeGenerationType="class">
+        <attribute name="ad" attributeType="String"/>
+        <attribute name="adres" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="telefon" attributeType="String"/>
+    </entity>
+    <entity name="Hatirlatici" representedClassName="Hatirlatici" syncable="YES" codeGenerationType="class">
+        <attribute name="aktif" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="saat" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="ilac" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ilac" inverseName="hatirlaticilar" inverseEntity="Ilac"/>
+    </entity>
+    <entity name="Ilac" representedClassName="Ilac" syncable="YES" codeGenerationType="class">
+        <attribute name="aciklama" optional="YES" attributeType="String"/>
+        <attribute name="ad" attributeType="String"/>
+        <attribute name="baslangicTarihi" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="bitisTarihi" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="doz" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dozBirimi" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="hatirlaticilar" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Hatirlatici" inverseName="ilac" inverseEntity="Hatirlatici"/>
+        <relationship name="kullanimlar" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="IlacKullanim" inverseName="ilac" inverseEntity="IlacKullanim"/>
+    </entity>
+    <entity name="IlacKullanim" representedClassName="IlacKullanim" syncable="YES" codeGenerationType="class">
+        <attribute name="alinanDoz" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="alindiMi" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="tarih" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="ilac" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ilac" inverseName="kullanimlar" inverseEntity="Ilac"/>
+    </entity>
+</model>
